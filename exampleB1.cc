@@ -40,7 +40,6 @@
 #include "G4PhysListFactory.hh"
 #include "G4StepLimiterPhysics.hh"
 #include "G4VModularPhysicsList.hh"
-#include "RAONSCL3PhysicsList.hh"
 #include "QBBC.hh"
 #include "FTFP_BERT.hh"
 #include "QGSP_BIC_AllHP.hh"
