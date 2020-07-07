@@ -68,7 +68,7 @@ void B1SteppingAction::UserSteppingAction(const G4Step* step)
       ->GetVolume()->GetLogicalVolume();
 
   // check if we are in scoring volume
-  if (volume != fScoringVolume) return;
+  //if (volume != fScoringVolume) return;
 
   // collect energy deposited in this step
   G4double edepStep = step->GetTotalEnergyDeposit();
@@ -88,20 +88,17 @@ void B1SteppingAction::UserSteppingAction(const G4Step* step)
   const G4TrackVector* secondary = step->GetSecondary();
   for( size_t lp=0; lp < (*secondary).size(); lp++ )
   {
-    if( (*secondary)[lp]->GetDefinition()==G4Gamma::GammaDefinition() )
-    {
-      //G4cout << "Secondary gamma energy: " << std::setw(5) << (*secondary)[lp]->GetTotalEnergy()/CLHEP::keV << " (keV)"<< G4std::endl;
-      //analysisManager->FillH1(0, (*secondary)[lp]->GetTotalEnergy()/CLHEP::keV);
-      analysisManager->FillNtupleSColumn(0, step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName());
-      analysisManager->FillNtupleDColumn(1, (G4double)(*secondary)[lp]->GetTotalEnergy()/CLHEP::keV);
-      analysisManager->FillNtupleDColumn(2, (G4double)(*secondary)[lp]->GetMomentum().getX()/CLHEP::keV);
-      analysisManager->FillNtupleDColumn(3, (G4double)(*secondary)[lp]->GetMomentum().getY()/CLHEP::keV);
-      analysisManager->FillNtupleDColumn(4, (G4double)(*secondary)[lp]->GetMomentum().getZ()/CLHEP::keV);
-      analysisManager->FillNtupleDColumn(5, (G4double)(*secondary)[lp]->GetMomentumDirection().getX());
-      analysisManager->FillNtupleDColumn(6, (G4double)(*secondary)[lp]->GetMomentumDirection().getY());
-      analysisManager->FillNtupleDColumn(7, (G4double)(*secondary)[lp]->GetMomentumDirection().getZ());
-      analysisManager->AddNtupleRow();
-    }
+    analysisManager->FillNtupleSColumn(0, step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName());
+    analysisManager->FillNtupleDColumn(1, (G4double)(*secondary)[lp]->GetTotalEnergy()/CLHEP::MeV);
+    analysisManager->FillNtupleDColumn(2, (G4double)(*secondary)[lp]->GetPosition().getX());
+    analysisManager->FillNtupleDColumn(3, (G4double)(*secondary)[lp]->GetPosition().getY());
+    analysisManager->FillNtupleDColumn(4, (G4double)(*secondary)[lp]->GetPosition().getZ());
+    analysisManager->FillNtupleDColumn(5, (G4double)(*secondary)[lp]->GetMomentum().getX()/CLHEP::MeV);
+    analysisManager->FillNtupleDColumn(6, (G4double)(*secondary)[lp]->GetMomentum().getY()/CLHEP::MeV);
+    analysisManager->FillNtupleDColumn(7, (G4double)(*secondary)[lp]->GetMomentum().getZ()/CLHEP::MeV);
+    analysisManager->FillNtupleSColumn(8, (*secondary)[lp]->GetDefinition()->GetParticleName() );
+    analysisManager->FillNtupleDColumn(9, (volume == fScoringVolume?1:0));
+    analysisManager->AddNtupleRow();
   }
 }
 

@@ -70,4 +70,3 @@ add_custom_target(B1 DEPENDS exampleB1)
 #
 install(TARGETS exampleB1 DESTINATION bin)
 
-

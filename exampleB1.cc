@@ -43,6 +43,7 @@
 #include "QBBC.hh"
 #include "FTFP_BERT.hh"
 #include "QGSP_BIC_AllHP.hh"
+#include "G4DecayPhysics.hh"
 
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
@@ -67,7 +68,7 @@ int main(int argc,char** argv)
   //
 #ifdef G4MULTITHREADED
   G4MTRunManager* runManager = new G4MTRunManager;
-  runManager->SetNumberOfThreads(12);
+  runManager->SetNumberOfThreads(16);
 #else
   G4RunManager* runManager = new G4RunManager;
 #endif
@@ -91,6 +92,7 @@ int main(int argc,char** argv)
   */
 
   G4VModularPhysicsList* physicsList = new QGSP_BIC_AllHP;
+  //physicsList->RegisterPhysics(new G4DecayPhysics);
   physicsList->SetVerboseLevel(0);
   runManager->SetUserInitialization(physicsList);
 

@@ -73,20 +73,22 @@ B1RunAction::B1RunAction()
   // Default settings
   analysisManager->SetNtupleMerging(true);
   analysisManager->SetVerboseLevel(1);
-  analysisManager->SetFileName("RAONSCL3");
+  analysisManager->SetFileName("RAONSCL2");
   analysisManager->OpenFile();
 
   // Create 1-dimensional histogram
   //analysisManager->CreateH1("Egamma", "", 100000, 0, 100000);
-  analysisManager->CreateNtuple("tRAONSCL3", "RAONSCL3");
+  analysisManager->CreateNtuple("tRAONSCL2", "RAONSCL2");
   analysisManager->CreateNtupleSColumn("proc");
-  analysisManager->CreateNtupleDColumn("Egamma");
+  analysisManager->CreateNtupleDColumn("Etotal");
+  analysisManager->CreateNtupleDColumn("x");
+  analysisManager->CreateNtupleDColumn("y");
+  analysisManager->CreateNtupleDColumn("z");
   analysisManager->CreateNtupleDColumn("px");
   analysisManager->CreateNtupleDColumn("py");
   analysisManager->CreateNtupleDColumn("pz");
-  analysisManager->CreateNtupleDColumn("pdir_x");
-  analysisManager->CreateNtupleDColumn("pdir_y");
-  analysisManager->CreateNtupleDColumn("pdir_z");
+  analysisManager->CreateNtupleSColumn("pid");
+  analysisManager->CreateNtupleDColumn("inTarget");
   analysisManager->FinishNtuple();
 }
 
