@@ -73,22 +73,22 @@ B1RunAction::B1RunAction()
   // Default settings
   analysisManager->SetNtupleMerging(true);
   analysisManager->SetVerboseLevel(1);
-  analysisManager->SetFileName("RAONSCL2");
-  analysisManager->OpenFile();
 
   // Create 1-dimensional histogram
   //analysisManager->CreateH1("Egamma", "", 100000, 0, 100000);
   analysisManager->CreateNtuple("tRAONSCL2", "RAONSCL2");
-  analysisManager->CreateNtupleSColumn("proc");
-  analysisManager->CreateNtupleDColumn("Etotal");
-  analysisManager->CreateNtupleDColumn("x");
-  analysisManager->CreateNtupleDColumn("y");
-  analysisManager->CreateNtupleDColumn("z");
+  analysisManager->CreateNtupleSColumn("trackPID");
+  analysisManager->CreateNtupleSColumn("preStepProc");
+  analysisManager->CreateNtupleDColumn("pID");
+  analysisManager->CreateNtupleDColumn("tID");
+  analysisManager->CreateNtupleDColumn("sNumber");
+  analysisManager->CreateNtupleDColumn("kineticEnergy");
+  analysisManager->CreateNtupleDColumn("vertex_x");
+  analysisManager->CreateNtupleDColumn("vertex_y");
+  analysisManager->CreateNtupleDColumn("vertex_z");
   analysisManager->CreateNtupleDColumn("px");
   analysisManager->CreateNtupleDColumn("py");
   analysisManager->CreateNtupleDColumn("pz");
-  analysisManager->CreateNtupleSColumn("pid");
-  analysisManager->CreateNtupleDColumn("inTarget");
   analysisManager->FinishNtuple();
 }
 
@@ -108,6 +108,9 @@ void B1RunAction::BeginOfRunAction(const G4Run*)
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
   accumulableManager->Reset();
 
+  // Set output file name and open it.
+  analysisManager->SetFileName("RAONSCL2");
+  analysisManager->OpenFile();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
